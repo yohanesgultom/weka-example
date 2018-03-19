@@ -75,7 +75,7 @@ public class LinearRegressionExample {
         Instances instances = new Instances(DATASET_FILE, header, DATASET_SIZE);
         instances.setClassIndex(DATASET_ATTRIBUTES_NUM - 1);
         return instances;
-    };
+    }
 
     private Instances loadDataset() throws RuntimeException {
         Instances dataset = null;
@@ -140,7 +140,7 @@ public class LinearRegressionExample {
     public double crossValidate(int numFolds) throws Exception {
         // cross validate
         Evaluation evaluation = new Evaluation(this.dataset);
-        evaluation.crossValidateModel(this.model, dataset, numFolds, new Random(1));
+        evaluation.crossValidateModel(this.model, this.dataset, numFolds, new Random(1));
         return evaluation.rootMeanSquaredError();
     }
 
@@ -150,7 +150,6 @@ public class LinearRegressionExample {
         instances.add(instance);
 
         instances = Filter.useFilter(instances, this.normalizer);
-        System.out.println(instances.instance(0));
         return this.model.classifyInstance(instances.instance(0));
     }
 
